@@ -1,0 +1,42 @@
+# config context path to "/" by setting an empty string
+server:
+  servlet:
+    context-path:
+
+# JACKSON
+spring:
+  jackson:
+    serialization:
+      INDENT_OUTPUT: true
+
+  h2:
+    console:
+      enabled: true
+
+    datasource:
+      url: jdbc:h2:~/test;DB_CLOSE_ON_EXIT=FALSE
+      driverClassName: org.h2.Driver
+      username: sa
+      password:
+  #    url: jdbc:mysql://localhost:3306/db_store
+  #    username: dbuser
+  #    password: pass123
+
+#  jpa:
+    #database-platform: org.hibernate.dialect.
+#    hibernate.ddl-auto: create
+
+jwt:
+  header: Authorization
+  secret: mySecret
+  expiration: 604800
+  route:
+    authentication:
+      path: auth/login
+      refresh: auth/refresh
+      register: auth/register
+
+#logging:
+#  level:
+#    org.springframework:
+#      security: DEBUG
