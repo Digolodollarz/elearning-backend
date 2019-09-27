@@ -31,13 +31,14 @@ class UserDetailServiceImpl(val userRepository: UserRepository,
         user.enabled = true
         if (user.lastPasswordResetDate == null) user.lastPasswordResetDate = Date(1509494400)
         val roleUser = authorityRepository.findByName(AuthorityName.ROLE_USER)
-        val authorities = authorityRepository.findAll()
+//        val authorities = authorityRepository.findAll()
         user.authorities = listOf(roleUser)
         if (user.authorities == null || user.authorities!!.isEmpty()) throw IllegalArgumentException("Failed to set user. Retry")
         if (userRepository.findByUsername(user.username!!) != null) throw IllegalArgumentException("Username taken")
         return userRepository.save(user)
     }
 
+    @Suppress("unused")
     fun update(user: User): User {
         val usr = userRepository.findByUsername(user.username!!) ?: throw IllegalArgumentException("Invalid user")
 
