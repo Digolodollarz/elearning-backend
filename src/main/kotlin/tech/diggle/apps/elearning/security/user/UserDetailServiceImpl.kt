@@ -1,10 +1,9 @@
-package tech.diggle.apps.qikpay.security.user
+package tech.diggle.apps.elearning.security.user
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
-import tech.diggle.apps.qikpay.security.authority.Authority
-import tech.diggle.apps.qikpay.security.authority.AuthorityName
-import tech.diggle.apps.qikpay.security.authority.AuthorityRepository
+import tech.diggle.apps.elearning.security.authority.AuthorityName
+import tech.diggle.apps.elearning.security.authority.AuthorityRepository
 import java.util.*
 
 @Service

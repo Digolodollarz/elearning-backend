@@ -1,4 +1,4 @@
-package tech.diggle.apps.qikpay.security.authority
+package tech.diggle.apps.elearning.security.authority
 
 import org.springframework.stereotype.Service
 

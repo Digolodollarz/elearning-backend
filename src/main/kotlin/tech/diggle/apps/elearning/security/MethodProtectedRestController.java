@@ -1,4 +1,4 @@
-package tech.diggle.apps.qikpay.security;
+package tech.diggle.apps.elearning.security;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;

@@ -1,4 +1,4 @@
-package tech.diggle.apps.qikpay.security.user
+package tech.diggle.apps.elearning.security.user
 
 
 import org.springframework.data.jpa.repository.JpaRepository

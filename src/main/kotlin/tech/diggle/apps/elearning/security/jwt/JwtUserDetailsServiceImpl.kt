@@ -1,4 +1,4 @@
-package tech.diggle.apps.qikpay.security.jwt
+package tech.diggle.apps.elearning.security.jwt
 
 
 import org.springframework.beans.factory.annotation.Autowired
@@ -7,9 +7,9 @@ import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.stereotype.Service
-import tech.diggle.apps.qikpay.security.authority.Authority
-import tech.diggle.apps.qikpay.security.user.User
-import tech.diggle.apps.qikpay.security.user.UserRepository
+import tech.diggle.apps.elearning.security.authority.Authority
+import tech.diggle.apps.elearning.security.user.User
+import tech.diggle.apps.elearning.security.user.UserRepository
 import java.util.*
 
 @Service

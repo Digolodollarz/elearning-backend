@@ -1,4 +1,4 @@
-package tech.diggle.apps.qikpay.security.jwt
+package tech.diggle.apps.elearning.security.jwt
 
 
 import java.io.Serializable

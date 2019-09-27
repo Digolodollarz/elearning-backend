@@ -1,4 +1,4 @@
-package tech.diggle.apps.qikpay.config
+package tech.diggle.apps.elearning.config
 
 
 import org.springframework.beans.factory.annotation.Autowired
@@ -15,8 +15,8 @@ import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
-import tech.diggle.apps.qikpay.security.jwt.JwtAuthenticationEntryPoint
-import tech.diggle.apps.qikpay.security.jwt.JwtAuthenticationTokenFilter
+import tech.diggle.apps.elearning.security.jwt.JwtAuthenticationEntryPoint
+import tech.diggle.apps.elearning.security.jwt.JwtAuthenticationTokenFilter
 import org.springframework.web.servlet.config.annotation.CorsRegistry
 import org.springframework.web.cors.CorsConfiguration
 

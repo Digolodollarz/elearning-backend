@@ -1,8 +1,8 @@
-package tech.diggle.apps.qikpay.security.authority
+package tech.diggle.apps.elearning.security.authority
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
-import tech.diggle.apps.qikpay.security.user.User
+import tech.diggle.apps.elearning.security.user.User
 import javax.persistence.*
 import javax.validation.constraints.NotNull
 

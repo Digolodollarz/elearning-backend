@@ -1,4 +1,4 @@
-package tech.diggle.apps.qikpay.security.jwt
+package tech.diggle.apps.elearning.security.jwt
 
 import org.springframework.security.core.AuthenticationException
 import org.springframework.security.web.AuthenticationEntryPoint

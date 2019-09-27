@@ -1,4 +1,4 @@
-package tech.diggle.apps.qikpay.security.jwt;
+package tech.diggle.apps.elearning.security.jwt;
 
 
 import java.util.Collection;
@@ -7,9 +7,9 @@ import java.util.stream.Collectors;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import tech.diggle.apps.qikpay.security.authority.Authority;
-import tech.diggle.apps.qikpay.security.authority.AuthorityName;
-import tech.diggle.apps.qikpay.security.user.User;
+import tech.diggle.apps.elearning.security.authority.Authority;
+import tech.diggle.apps.elearning.security.authority.AuthorityName;
+import tech.diggle.apps.elearning.security.user.User;
 
 //@Service
 public final class JwtUserFactory {

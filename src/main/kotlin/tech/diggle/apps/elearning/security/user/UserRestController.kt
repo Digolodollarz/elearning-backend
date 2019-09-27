@@ -1,4 +1,4 @@
-package tech.diggle.apps.qikpay.security.user
+package tech.diggle.apps.elearning.security.user
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.web.bind.annotation.*
-import tech.diggle.apps.qikpay.security.jwt.JwtTokenUtil
-import tech.diggle.apps.qikpay.security.jwt.JwtUser
+import tech.diggle.apps.elearning.security.jwt.JwtTokenUtil
+import tech.diggle.apps.elearning.security.jwt.JwtUser
 
 import javax.servlet.http.HttpServletRequest
 

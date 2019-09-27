@@ -1,4 +1,4 @@
-package tech.diggle.apps.qikpay.security;
+package tech.diggle.apps.elearning.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -13,12 +13,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
-import tech.diggle.apps.qikpay.security.jwt.JwtAuthenticationRequest;
-import tech.diggle.apps.qikpay.security.jwt.JwtUser;
-import tech.diggle.apps.qikpay.security.jwt.JwtAuthenticationResponse;
-import tech.diggle.apps.qikpay.security.jwt.JwtTokenUtil;
-import tech.diggle.apps.qikpay.security.user.User;
-import tech.diggle.apps.qikpay.security.user.UserDetailServiceImpl;
+import tech.diggle.apps.elearning.security.jwt.JwtAuthenticationRequest;
+import tech.diggle.apps.elearning.security.jwt.JwtUser;
+import tech.diggle.apps.elearning.security.jwt.JwtAuthenticationResponse;
+import tech.diggle.apps.elearning.security.jwt.JwtTokenUtil;
+import tech.diggle.apps.elearning.security.user.User;
+import tech.diggle.apps.elearning.security.user.UserDetailServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
 
