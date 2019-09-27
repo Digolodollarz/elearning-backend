@@ -2,6 +2,7 @@ package tech.diggle.apps.elearning.security.user
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import jdk.nashorn.internal.objects.annotations.Getter
 import tech.diggle.apps.elearning.security.authority.Authority
 import java.util.Date
 import javax.persistence.*
@@ -32,12 +33,15 @@ class User {
     @Column(name = "FIRSTNAME", length = 50)
     @NotNull
     @Size(min = 2, max = 50)
-    var firstname: String? = null
+    var firstName: String? = null
 
     @Column(name = "LASTNAME", length = 50)
     @NotNull
     @Size(min = 2, max = 50)
-    var lastname: String? = null
+    var lastName: String? = null
+
+
+    var fullName: String? = null
 
     @Column(name = "EMAIL", length = 50)
     @NotNull

@@ -11,11 +11,22 @@ class UserDetailServiceImpl(val userRepository: UserRepository,
                             val authorityRepository: AuthorityRepository) {
     val bCrypt: BCryptPasswordEncoder = BCryptPasswordEncoder()
     fun create(user: User): User {
+        if (user.username == null) user.username = user.email
         if (user.username == null) throw NullPointerException("Username cannot be null")
         if (user.password == null) throw NullPointerException("Password yako cannot be nothing")
         user.password = bCrypt.encode(user.password)
-        if (user.firstname == null) throw NullPointerException("First Name cannot be empty")
-        if (user.lastname == null) throw NullPointerException("Last name cannot be empty")
+
+        if (user.firstName == null && user.fullName != null) {
+            if (user.fullName!!.indexOf(' ') > 0) {
+                user.lastName = user.fullName!!.substringAfterLast(' ')
+                user.firstName = user.fullName!!.substringBeforeLast(' ')
+            } else {
+                user.firstName = user.fullName
+                user.lastName = user.fullName
+            }
+        }
+        if (user.firstName == null) throw NullPointerException("First Name cannot be empty")
+        if (user.lastName == null) throw NullPointerException("Last name cannot be empty")
         if (user.email == null) throw NullPointerException("Email address cannot be empty")
         user.enabled = true
         if (user.lastPasswordResetDate == null) user.lastPasswordResetDate = Date(1509494400)

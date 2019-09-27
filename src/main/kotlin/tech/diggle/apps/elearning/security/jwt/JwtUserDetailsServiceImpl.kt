@@ -33,8 +33,8 @@ class JwtUserDetailsServiceImpl : UserDetailsService {
     fun createUser(usr: JwtUser): User {
         val user: User = User().apply {
             username = usr.username
-            firstname = usr.firstname
-            lastname = usr.lastname
+            firstName = usr.firstname
+            lastName = usr.lastname
             email = usr.email
             password = usr.password
             authorities = usr.authorities as List<Authority>

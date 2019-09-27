@@ -21,8 +21,8 @@ public final class JwtUserFactory {
         return new JwtUser(
                 user.getId(),
                 user.getUsername(),
-                user.getFirstname(),
-                user.getLastname(),
+                user.getFirstName(),
+                user.getLastName(),
                 user.getEmail(),
                 user.getPassword(),
                 mapToGrantedAuthorities(user.getAuthorities()),
@@ -50,8 +50,8 @@ public final class JwtUserFactory {
     public static User user(JwtUser user) {
         User usr = new User();
         usr.setUsername(user.getUsername());
-        usr.setFirstname(user.getFirstname());
-        usr.setLastname(user.getLastname());
+        usr.setFirstName(user.getFirstname());
+        usr.setLastName(user.getLastname());
         usr.setEmail(user.getEmail());
         usr.setPassword(user.getPassword());
         usr.setAuthorities(mapToAuthorities(user.getAuthorities()));
