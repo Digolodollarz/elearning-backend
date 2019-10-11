@@ -39,6 +39,9 @@ open class ChatMessage : BaseModel() {
 
     @ManyToOne
     var sender: User? = null
+
+    @Column(name = "file")
+    var file = ""
 }
 
 @Entity
@@ -48,7 +51,7 @@ class GroupMessage : ChatMessage() {
 }
 
 @Entity
-class DM : ChatMessage(){
+class DM : ChatMessage() {
     @ManyToOne
     var recipient: User? = null
 }

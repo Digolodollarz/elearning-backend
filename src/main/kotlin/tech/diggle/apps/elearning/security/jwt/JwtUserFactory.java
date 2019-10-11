@@ -1,8 +1,12 @@
 package tech.diggle.apps.elearning.security.jwt;
 
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -32,9 +36,16 @@ public final class JwtUserFactory {
     }
 
     private static List<GrantedAuthority> mapToGrantedAuthorities(List<Authority> authorities) {
-        return authorities.stream()
-                .map(authority -> new SimpleGrantedAuthority(authority.getName().name()))
-                .collect(Collectors.toList());
+        List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
+        authorities.forEach(
+                authority -> {
+                    if(authority != null && authority.getName() != null){
+                        grantedAuthorities.add(new SimpleGrantedAuthority(authority.getName().name()));
+                    }
+                }
+        );
+
+        return grantedAuthorities;
     }
 
     private static List<Authority> mapToAuthorities(Collection<GrantedAuthority> authorities) {
