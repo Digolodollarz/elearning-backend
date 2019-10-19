@@ -1,5 +1,6 @@
 package tech.diggle.apps.elearning.stream
 
+import org.jetbrains.annotations.NotNull
 import tech.diggle.apps.elearning.chat.ChatRoom
 import tech.diggle.apps.elearning.security.user.User
 import java.util.*
@@ -101,6 +102,7 @@ class ClassWork {
     val id: Long? = null
 
     @ManyToOne
+    @NotNull
     val module: Module? = null
 
     @Column

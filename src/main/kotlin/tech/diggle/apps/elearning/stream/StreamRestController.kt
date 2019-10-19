@@ -22,7 +22,8 @@ class StreamRestController(@Autowired val repository: StreamRepository) {
 @RestController
 @RequestMapping("modules")
 class ModuleRestController(@Autowired val repository: ModuleRepository,
-                           @Autowired val chatRoomRepository: ChatRoomRepository) {
+                           @Autowired val chatRoomRepository: ChatRoomRepository,
+                           @Autowired val classWorkRepository: ClassWorkRepository) {
     @GetMapping
     fun getAll() = repository.findAll()
 
@@ -38,6 +39,9 @@ class ModuleRestController(@Autowired val repository: ModuleRepository,
 
     @GetMapping("{id}")
     fun getOne(@PathVariable id: Long) = repository.findOne(id)
+
+    @GetMapping("{id}/classwork")
+    fun getClassWork(@PathVariable id: Long) = classWorkRepository.findAllByModuleId(id)
 
 }
 
@@ -57,7 +61,7 @@ class LevelRestController(@Autowired val repository: LevelRepository) {
 
 @RestController
 @RequestMapping("class-work")
-class ClassWorkController(@Autowired val repository: ClassWorkRepository){
+class ClassWorkController(@Autowired val repository: ClassWorkRepository) {
     @GetMapping
     fun getAll() = repository.findAll()
 
@@ -70,7 +74,7 @@ class ClassWorkController(@Autowired val repository: ClassWorkRepository){
     }
 
     @PostMapping("{id}/answers")
-    fun addAnswer(@RequestBody classWorkAnswer: ClassWorkAnswer){
+    fun addAnswer(@RequestBody classWorkAnswer: ClassWorkAnswer) {
 
     }
 }

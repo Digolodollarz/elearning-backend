@@ -11,10 +11,10 @@ interface LevelRepository: PagingAndSortingRepository<Level, Long>
 interface ModuleRepository: PagingAndSortingRepository<Module, Long>
 
 interface ClassWorkRepository: PagingAndSortingRepository<ClassWork, Long>{
-    fun findAllByModuleId(id: Long, page: PageRequest): Page<ClassWork>
+    fun findAllByModuleId(id: Long): List<ClassWork>
 }
 
 interface ClassWorkAnswersRepository: PagingAndSortingRepository<ClassWorkAnswer, Long>{
-    fun findByUserIdAndClassWorkId(userId: Long, classWorkId: Long): List<ClassWorkAnswer>
-    fun findByUserId(userId: Long): List<ClassWorkAnswer>
+    fun findByStudentIdAndClassWorkId(userId: Long, classWorkId: Long): List<ClassWorkAnswer>
+    fun findByStudentId(userId: Long): List<ClassWorkAnswer>
 }
