@@ -1,9 +1,11 @@
 package tech.diggle.apps.elearning.stream
 
+import com.sun.javaws.exceptions.InvalidArgumentException
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 import tech.diggle.apps.elearning.chat.ChatRoom
 import tech.diggle.apps.elearning.chat.ChatRoomRepository
+import java.util.*
 
 @RestController
 @RequestMapping("streams")
@@ -71,6 +73,12 @@ class ClassWorkController(@Autowired val repository: ClassWorkRepository) {
     @PostMapping
     fun addNew(@RequestBody classWork: ClassWork): ClassWork? {
         return repository.save(classWork)
+    }
+
+    @GetMapping("search")
+    fun findByModule(@RequestParam moduleId: Optional<Long>): List<ClassWork> {
+        if (!moduleId.isPresent) throw IllegalArgumentException()
+        return repository.findAllByModuleId(moduleId.get())
     }
 
     @PostMapping("{id}/answers")
