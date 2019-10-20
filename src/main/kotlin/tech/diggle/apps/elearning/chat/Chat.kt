@@ -1,6 +1,7 @@
 package tech.diggle.apps.elearning.chat
 
 import tech.diggle.apps.elearning.security.user.User
+import tech.diggle.apps.elearning.stream.Module
 import java.util.*
 import javax.persistence.*
 
@@ -29,6 +30,9 @@ abstract class BaseModel {
 class ChatRoom : BaseModel() {
     @ManyToMany
     var users: List<User> = listOf()
+
+    @OneToOne
+    var module: Module? = null
 }
 
 

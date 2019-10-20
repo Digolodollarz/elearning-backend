@@ -20,7 +20,9 @@ class ChatRoomRestController(@Autowired val chatRoomRepository: ChatRoomReposito
 
     @GetMapping("{id}")
     fun getRoom(@PathVariable id: Long): ChatRoom? {
-        return chatRoomRepository.findOne(id)
+        val room =  chatRoomRepository.findOne(id)
+        room.users.size
+        return room
     }
 }
 
@@ -53,6 +55,9 @@ class GroupMessageRestController(@Autowired val repository: GroupMessageReposito
     fun getGroupMessages(@PathVariable id: Long): List<GroupMessage> {
         return repository.findByRoomId(id)
     }
+
+//    @GetMapping("{id}/uses")
+//    fun getGroupUsers(@Path)
 }
 
 @RequestMapping("dms")

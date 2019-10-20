@@ -4,6 +4,7 @@ package tech.diggle.apps.elearning.security.user
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import jdk.nashorn.internal.objects.annotations.Getter
 import tech.diggle.apps.elearning.security.authority.Authority
+import tech.diggle.apps.elearning.stream.Level
 import java.util.Date
 import javax.persistence.*
 
@@ -61,4 +62,7 @@ class User {
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "USER_AUTHORITY", joinColumns = arrayOf(JoinColumn(name = "USER_ID", referencedColumnName = "ID")), inverseJoinColumns = arrayOf(JoinColumn(name = "AUTHORITY_ID", referencedColumnName = "ID")))
     var authorities: List<Authority>? = null
+
+    @ManyToOne
+    var level: Level? = null
 }

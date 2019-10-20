@@ -4,15 +4,18 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.security.access.prepost.PreAuthorize
+import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.web.bind.annotation.*
+import tech.diggle.apps.elearning.security.authority.AuthorityRepository
 import tech.diggle.apps.elearning.security.jwt.JwtTokenUtil
 import tech.diggle.apps.elearning.security.jwt.JwtUser
 
 import javax.servlet.http.HttpServletRequest
 
 @RestController
-class UserRestController(@Autowired val repository: UserRepository) {
+class UserRestController(@Autowired val repository: UserRepository,
+                         @Autowired val authorityRepository: AuthorityRepository) {
 
     @Value("\${jwt.header}")
     private val tokenHeader: String? = null
@@ -28,10 +31,10 @@ class UserRestController(@Autowired val repository: UserRepository) {
     private val userDetailService: UserDetailServiceImpl? = null
 
     @RequestMapping("user", method = [(RequestMethod.GET)])
-    fun getAuthenticatedUser(request: HttpServletRequest): JwtUser {
+    fun getAuthenticatedUser(request: HttpServletRequest): User? {
         val token = request.getHeader(tokenHeader).substring(7)
         val username = jwtTokenUtil!!.getUsernameFromToken(token)
-        return userDetailsService!!.loadUserByUsername(username) as JwtUser
+        return repository.findByUsername(username)
     }
 
     @GetMapping("user/{userName}")
@@ -41,9 +44,9 @@ class UserRestController(@Autowired val repository: UserRepository) {
 
     @PostMapping("user")
     @PreAuthorize("hasRole('ADMIN')")
-    fun addUser(@RequestBody user: User): JwtUser {
+    fun addUser(@RequestBody user: User): UserDetails? {
         val usr = userDetailService!!.create(user)
-        return userDetailsService!!.loadUserByUsername(usr.username) as JwtUser
+        return userDetailsService!!.loadUserByUsername(usr.username)
     }
 
     @GetMapping("users")
@@ -52,5 +55,12 @@ class UserRestController(@Autowired val repository: UserRepository) {
         return repository.findAll()
     }
 
+    @PostMapping("users/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    fun updateUser(@RequestBody user: User): User? {
+        return repository.save(user)
+    }
 
+    @GetMapping("authorities")
+    fun getAuthorities() = authorityRepository.findAll()
 }

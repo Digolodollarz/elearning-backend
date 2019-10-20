@@ -1,11 +1,14 @@
 package tech.diggle.apps.elearning.stream
 
-import com.sun.javaws.exceptions.InvalidArgumentException
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.web.bind.annotation.*
 import tech.diggle.apps.elearning.chat.ChatRoom
 import tech.diggle.apps.elearning.chat.ChatRoomRepository
+import tech.diggle.apps.elearning.security.jwt.JwtTokenUtil
+import tech.diggle.apps.elearning.security.user.UserRepository
 import java.util.*
+import javax.servlet.http.HttpServletRequest
 
 @RestController
 @RequestMapping("streams")
@@ -25,7 +28,8 @@ class StreamRestController(@Autowired val repository: StreamRepository) {
 @RequestMapping("modules")
 class ModuleRestController(@Autowired val repository: ModuleRepository,
                            @Autowired val chatRoomRepository: ChatRoomRepository,
-                           @Autowired val classWorkRepository: ClassWorkRepository) {
+                           @Autowired val classWorkRepository: ClassWorkRepository,
+                           @Autowired val userRepository: UserRepository) {
     @GetMapping
     fun getAll() = repository.findAll()
 
@@ -45,11 +49,20 @@ class ModuleRestController(@Autowired val repository: ModuleRepository,
     @GetMapping("{id}/classwork")
     fun getClassWork(@PathVariable id: Long) = classWorkRepository.findAllByModuleId(id)
 
+    @GetMapping("{id}/users")
+    fun getUsers(@PathVariable id: Long) = repository.findOne(id).students
+
+    @GetMapping("{id}/findUsers")
+    fun findUsers(@PathVariable id: Long) = userRepository.findByLevelId(id)
+
+    @GetMapping("delete/{id}")
+    fun deleteModule(@PathVariable id: Long) = repository.delete(id)
 }
 
 @RestController
 @RequestMapping("levels")
-class LevelRestController(@Autowired val repository: LevelRepository) {
+class LevelRestController(@Autowired val repository: LevelRepository,
+                          @Autowired val moduleRepository: ModuleRepository) {
     @GetMapping
     fun getAll() = repository.findAll()
 
@@ -59,11 +72,19 @@ class LevelRestController(@Autowired val repository: LevelRepository) {
     @GetMapping("{id}")
     fun getOne(@PathVariable id: Long) = repository.findOne(id)
 
+    @GetMapping("{id}/modules")
+    fun getModules(@PathVariable id: Long): List<Module> {
+        return moduleRepository.findAllByLevelId(id)
+    }
 }
 
 @RestController
 @RequestMapping("class-work")
-class ClassWorkController(@Autowired val repository: ClassWorkRepository) {
+class ClassWorkController(@Autowired val repository: ClassWorkRepository,
+                          @Autowired val answersRepository: ClassWorkAnswersRepository,
+                          @Autowired val userRepository: UserRepository,
+                          @Autowired val jwtTokenUtil: JwtTokenUtil,
+                          @Value("\${jwt.header}") val tokenHeader: String) {
     @GetMapping
     fun getAll() = repository.findAll()
 
@@ -82,7 +103,15 @@ class ClassWorkController(@Autowired val repository: ClassWorkRepository) {
     }
 
     @PostMapping("{id}/answers")
-    fun addAnswer(@RequestBody classWorkAnswer: ClassWorkAnswer) {
+    fun addAnswer(@RequestBody classWorkAnswer: ClassWorkAnswer, request: HttpServletRequest): ClassWorkAnswer? {
+        val token = request.getHeader(tokenHeader).substring(7)
+        val username = jwtTokenUtil.getUsernameFromToken(token)
+        classWorkAnswer.student = userRepository.findByUsername(username)
+        return answersRepository.save(classWorkAnswer)
+    }
 
+    @GetMapping("{id}/answers")
+    fun getAnswers(@PathVariable id: Long): List<ClassWorkAnswer> {
+        return answersRepository.findByClassWorkId(id)
     }
 }
