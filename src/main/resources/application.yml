@@ -9,6 +9,12 @@ spring:
     serialization:
       INDENT_OUTPUT: true
 
+  mail:
+    host: diggle.tech
+    port: 26
+    username: no-reply@diggle.tech
+    password: Hklfaokalk.^sfakli5o214
+
 #  h2:
 #    console:
 #      enabled: true

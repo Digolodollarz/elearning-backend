@@ -44,4 +44,15 @@ class UserDetailServiceImpl(val userRepository: UserRepository,
 
         return userRepository.save(usr)
     }
+
+
+    fun findByUsernameOrEmail(userName: String): User? {
+        return userRepository.findByUsername(userName) ?: userRepository.findByEmail(userName)
+    }
+
+    fun updatePassword(appUser: User, password: String): User {
+        appUser.lastPasswordResetDate = Date()
+        appUser.password = bCrypt.encode(password)
+        return appUser
+    }
 }
