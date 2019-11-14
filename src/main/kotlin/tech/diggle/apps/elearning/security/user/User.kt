@@ -3,6 +3,7 @@ package tech.diggle.apps.elearning.security.user
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import jdk.nashorn.internal.objects.annotations.Getter
+import tech.diggle.apps.elearning.department.Department
 import tech.diggle.apps.elearning.security.authority.Authority
 import tech.diggle.apps.elearning.stream.Level
 import java.util.Date
@@ -65,4 +66,13 @@ class User {
 
     @ManyToOne
     var level: Level? = null
+
+    @ManyToOne
+    var department: Department? = null
+
+    @Column
+    var regNumber: String? = null
+
+    @Column
+    var phoneNumber: String? = null
 }

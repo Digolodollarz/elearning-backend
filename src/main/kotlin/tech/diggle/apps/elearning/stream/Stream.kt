@@ -2,6 +2,7 @@ package tech.diggle.apps.elearning.stream
 
 import org.jetbrains.annotations.NotNull
 import tech.diggle.apps.elearning.chat.ChatRoom
+import tech.diggle.apps.elearning.department.Department
 import tech.diggle.apps.elearning.security.user.User
 import java.util.*
 import javax.persistence.*
@@ -74,6 +75,9 @@ class Module {
 
     @ManyToOne
     val level: Level? = null
+
+    @ManyToOne
+    val department: Department? = null
 
     @ManyToMany(fetch = FetchType.EAGER)
     var students: Set<User> = setOf()

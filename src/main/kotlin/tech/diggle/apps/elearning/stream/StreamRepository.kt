@@ -10,6 +10,7 @@ interface LevelRepository : PagingAndSortingRepository<Level, Long>
 
 interface ModuleRepository : PagingAndSortingRepository<Module, Long> {
     fun findAllByLevelId(id: Long): List<Module>
+    fun findAllByLevelIdAndDepartmentId(level: Long, department: Long): List<Module>
 }
 
 interface ClassWorkRepository : PagingAndSortingRepository<ClassWork, Long> {

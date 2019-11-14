@@ -1,6 +1,7 @@
 package tech.diggle.apps.elearning.stream
 
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Required
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.web.bind.annotation.*
 import tech.diggle.apps.elearning.chat.ChatRoom
@@ -76,6 +77,11 @@ class LevelRestController(@Autowired val repository: LevelRepository,
     fun getModules(@PathVariable id: Long): List<Module> {
         return moduleRepository.findAllByLevelId(id)
     }
+
+    @GetMapping("{id}/{department}/modules")
+    fun getDepartmentModules(@PathVariable id: Long, @PathVariable department: Long): List<Module> {
+        return moduleRepository.findAllByLevelIdAndDepartmentId(id, department)
+    }
 }
 
 @RestController
@@ -90,6 +96,9 @@ class ClassWorkController(@Autowired val repository: ClassWorkRepository,
 
     @GetMapping("{id}")
     fun getOne(@PathVariable id: Long) = repository.findOne(id)
+
+    @PostMapping("{id}")
+    fun update(@RequestBody work: ClassWork) = repository.save(work)
 
     @PostMapping
     fun addNew(@RequestBody classWork: ClassWork): ClassWork? {
